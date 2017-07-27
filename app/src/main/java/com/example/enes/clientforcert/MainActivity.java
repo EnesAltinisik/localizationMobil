@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private Button btnCount;
     WifiManager wifiManager;
     Context context;
-    private static String post;
+
+    boolean kontForScan=false;
+    private static String post="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         context = getApplicationContext();
-
         List<String> permissionsList = new ArrayList<String>();
 
         permissionsList.add(Manifest.permission.ACCESS_FINE_LOCATION);
@@ -70,24 +71,51 @@ public class MainActivity extends AppCompatActivity {
         wifiManager = (WifiManager)context.getSystemService(Context.WIFI_SERVICE);
         registerReceiver(mWifiScanReceiver,
                 new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+        registerReceiver(mWifiScanReceiverResult,
+                new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         wifiManager.startScan();
 
     }
 
+    private final BroadcastReceiver mWifiScanReceiverResult = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context c, Intent intent) {
+            if(intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)){
+                List<ScanResult> mScanResults = wifiManager.getScanResults();
+                System.out.println(2);
+                bubbleSort(mScanResults);
+                String temp="";
+                for (ScanResult scanResult : mScanResults) {
+                    if(scanResult.SSID.equals("ETUNET-eduroam")){
+                        System.out.println(scanResult.BSSID+" : "+scanResult.level);
+                        temp+=(scanResult.BSSID+" : "+scanResult.level+"\t");
+                    }
+                }
+                if(post!=null)
+                if(!post.equals(temp)){post=temp;
+                mWeatherTextView.setText(post);
+                new FetchTask().execute("");
+                System.out.println(3);}
+                registerReceiver(mWifiScanReceiver,
+                    new IntentFilter(WifiManager.RSSI_CHANGED_ACTION));
+            }
+        }
+    };
     private final BroadcastReceiver mWifiScanReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context c, Intent intent) {
             if (intent.getAction().equals(WifiManager.RSSI_CHANGED_ACTION)) {
-                dataOlustur();
-                mWeatherTextView.setText(post);
-                new FetchTask().execute("");
+               wifiManager.startScan();
+                unregisterReceiver(mWifiScanReceiver);
             }
         }
     };
     public HashMap<String,Integer> scan(){
-        HashMap<String,Integer> m1 = new HashMap();
+        HashMap<String,Integer> m1= new HashMap();
         wifiManager.startScan();
+        System.out.println(1);
         List<ScanResult> mScanResults = wifiManager.getScanResults();
+        System.out.println(3);
         bubbleSort(mScanResults);
         post="";
         for (ScanResult scanResult : mScanResults) {
@@ -149,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
             try {
 
-                Socket s = new Socket("10.3.43.49", 4444);
+                Socket s = new Socket("10.4.42.241", 4444);
 
                 BufferedReader input =
                         new BufferedReader(new InputStreamReader(s.getInputStream()));

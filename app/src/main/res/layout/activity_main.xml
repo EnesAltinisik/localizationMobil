@@ -1,53 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    >
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="120sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:text="send" />
 
-    <EditText
-        android:id="@+id/x_coordinat"
-        android:layout_width="120sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:padding="16dp"
-        android:textSize="20sp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/oda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oda:   "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+        <TextView
+            android:id="@+id/oda_bilgi"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/tv_weather_data"
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_gravity="bottom"
-        android:layout_height="453dp"
-        android:textSize="20sp" />
+        android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/room"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:padding="16dp"
-        android:textSize="20sp" />
-    <EditText
-        android:id="@+id/yon"
-        android:layout_width="120dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|left"
-        android:padding="16dp"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="En:  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/y_coordinat"
-        android:layout_width="80sp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:padding="16dp"
-        android:textSize="20sp" />
+        <EditText
+            android:id="@+id/editText1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" >
 
-</FrameLayout>
+            <requestFocus />
+        </EditText>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Boy:  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send" />
+
+
+            <TableLayout
+                android:id="@+id/TableLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="22dp"
+                android:textAlignment="center"
+                android:stretchColumns="*"
+                >
+
+
+            </TableLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ip address:  "
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/editText3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+    </LinearLayout>
+
+</LinearLayout>
